@@ -1,7 +1,14 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { TreePine, Leaf, Database, Map } from 'lucide-react';
 
 const AboutPage = () => {
+  const [messageSent, setMessageSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    setMessageSent(true);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,36 +106,66 @@ const AboutPage = () => {
         </div>
 
 
-        <div className="mb-16">
-          <div className="flex items-center mb-6">
-            <Map className="h-6 w-6 text-primary-600 dark:text-primary-500 mr-2" />
-            <h2 className="text-2xl font-heading font-semibold text-gray-900 dark:text-gray-100">The Impact</h2>
-          </div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-3xl font-heading font-semibold text-gray-900 dark:text-white mb-6 text-center">
+              Contact Us
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-forest-50 dark:bg-forest-900/30 rounded-lg p-5 border border-forest-200 dark:border-forest-800">
-              <h3 className="text-forest-800 dark:text-forest-200 font-medium mb-2">Environmental Benefits</h3>
-              <p className="text-forest-700 dark:text-forest-300 text-sm">
-                Properly placed trees can sequester up to 48 pounds of CO₂ annually, reduce soil erosion by up to 75%, and increase biodiversity in restored ecosystems.
-              </p>
-            </div>
+            {!messageSent ? (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                    placeholder="Your Name"
+                  />
+                </div>
 
-            <div className="bg-earth-50 dark:bg-earth-900/30 rounded-lg p-5 border border-earth-200 dark:border-earth-800">
-              <h3 className="text-earth-800 dark:text-earth-200 font-medium mb-2">Economic Value</h3>
-              <p className="text-earth-700 dark:text-earth-300 text-sm">
-                Strategic reforestation can reduce planting costs by 30%, increase tree survival rates, and create sustainable forestry opportunities for local communities.
-              </p>
-            </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    className="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                    placeholder="you@example.com"
+                  />
+                </div>
 
-            <div className="bg-secondary-50 dark:bg-secondary-900/30 rounded-lg p-5 border border-secondary-200 dark:border-secondary-800">
-              <h3 className="text-secondary-800 dark:text-secondary-200 font-medium mb-2">Climate Resilience</h3>
-              <p className="text-secondary-700 dark:text-secondary-300 text-sm">
-                Optimally placed forests help mitigate climate change, reduce urban heat islands by up to 4°C, and protect watersheds for improved water security.
-              </p>
-            </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Message
+                  </label>
+                  <textarea
+                    rows="4"
+                    required
+                    className="mt-1 block w-full px-4 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+                    placeholder="Tell us how we can help..."
+                  />
+                </div>
+
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="text-center text-green-600 dark:text-green-400 text-lg font-medium">
+                Message sent successfully. We’ll get back to you soon!
+              </div>
+            )}
           </div>
         </div>
-
       </div>
     </div>
   );
